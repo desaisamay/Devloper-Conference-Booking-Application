@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="CSS/Stylings.css">
+   <script src="JavaScript/Controller.js"></script>
+   <style>
+   </style>
+   <body ng-app="myApp">
+      <div ng-controller="myCtrl">
+         <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+               <div class="navbar-header">
+                  <a class="navbar-brand" href="#"  ng-click="showhomepage()">SAP Developer Conference Booking</a>
+               </div>
+               <ul class="nav navbar-nav">
+                  <li><a href="#" ng-click="showhomepage()">Home</a></li>
+                  <li><a href="#" ng-click="organiserFunction()">Organiser</a></li>
+                  <li><a href="#" ng-click="guestFunction()">Guest</a></li>
+               </ul>
+            </div>
+         </nav>
+         <!-- start of html -->
+         <div ng-show="homepage">
+            <div class="row heading">
+               <h1  class="h1c1">Welcome to Developer Conference Booking Application </h1>
+            </div>
+            <div class="row center">
+               <h3 class="center heading2">Let us know who you are!</h3>
+            </div>
+            <div class="row" class="margintop2">
+               <div class="col-md-4">
+                  <button type="button" class="btn btn-info btn-lg buttonright" ng-click="organiserFunction()">Organiser</button>
+               </div>
+               <div class="col-md-3">
+               </div>
+               <div class="col-md-4 ">
+                  <button type="button" class="btn btn-info btn-lg buttonwidth" ng-click="guestFunction()">Guest</button>
+               </div>
+            </div>
+         </div>
+         <div class="container containerc" ng-show="showguest" >
+            <div class="margintop2">
+               <h2 class="margintop2 guest">Guest's Portal</h2>
+               <div class="row margintop2">
+                  <h5 >Available Locations:</h5>
+               </div>
+               <div class="row margintop2 marginright4" >
+                  <div ng-repeat="(key, value) in data" class="marginright4">
+                     <label >
+                     <input type="radio" ng-click="calculateSeat()" name="guestlocation1" ng-model="project.guesttitle" ng-value="key" />&nbsp; &nbsp; {{key}}
+                     </label>
+                  </div>
+               </div>
+               <div class="row margintop2"  >
+                  <h5 >Available Topics:</h5>
+               </div>
+               <div class="row margintop2 marginright4"  >
+                  <div  class="marginright4" ng-repeat="(key2, value2) in data[project.guesttitle]">
+                     <label >
+                     <input type="radio" ng-click="calculateSeat()" name="guestlocation13" ng-model="project.guesttitle2" ng-value="key2" />&nbsp; &nbsp; {{key2}}
+                     </label>
+                  </div>
+               </div>
+               <div class="row margintop2" >
+                  <h5 >Available Timeslots:</h5>
+               </div>
+               <div class="row margintop2 marginright4">
+                  <div class="marginright4"ng-click="calculataSeat()" ng-repeat="(key3, value3) in data[project.guesttitle][project.guesttitle2]">
+                     <label >
+                     <input type="radio" ng-click="calculateSeat()" name="guestlocation12" ng-model="project.guesttitle3" ng-value="key3" />&nbsp; &nbsp; {{key3}}
+                     </label>
+                  </div>
+               </div>
+               <div class="row margintop2" >
+                  <h5 >Available Seats:</h5>
+               </div>
+               <div class="row margintop2 marginright4">
+                  <div class="marginright4">
+                     <label >
+                     <input type="text" name="guestlocation14" ng-disabled="true" ng-model="project.availableSeats" ng-value="project.availableSeats" />
+                     </label>
+                  </div>
+               </div>
+               <div class="row margintop2"  >
+                  <h5 >Number of Seats to Book:</h5>
+               </div>
+               <div class="row marginright4 margintop2">
+                  <div class="marginright4">
+                     <label >
+                     <input type="number" name="guestlocation14" ng-disabled="!project.availableSeats" ng-model="project.numberOfSeatsToBook"  />
+                     </label>
+                  </div>
+               </div>
+               <div class="col-sm-offset-2 col-sm-10 margintop2">
+                  <button type="submit" ng-click="bookSeats()" class="btn btn-default btnsubmt">Submit</button>
+               </div>
+            </div>
+         </div>
+         <div class="container" ng-show="showorganiser">
+            <div class="margintop2">
+               <h2>Organiser's Portal</h2>
+               <!-- Trigger the modal with a button -->
+               <button  type="submit" class="btn btn-info btn-md margintop2" ng-click="showform=true">Create Conference</button>
+               <button type="submit" ng-click="format()"class="btn btn-info btn-md btn2">Format Storage</button>
+               <!-- Modal -->
+               <div  ng-show="showform" class="container margintop2">
+                  <h3>Create a new Conference</h3>
+                  <div class="row">
+                     <h5 class="control-label col-sm-2 margintop2" >Locations:</h5>
+                     <div class="col-sm-10">
+                        <select id="location1" ng-model="project.location" class="selectOrg">
+                           <option></option>
+
+                           <option 
+                                       ng-repeat="source in locations"
+                                       value={{source}}>{{source}}</option>
+                        
+                        </select>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <h5   class="control-label col-sm-2 margintop2"  >Topic:</h5>
+                     <div class="col-sm-10">
+                        <select id="topic1" ng-model="project.topic" class="selectOrg">
+                           <option></option>
+                           <option value="Artificial Intelligence">Artificial Intelligence</option>
+                           <option value="User Interface">User Interface</option>
+                           <option value="Cloud Learning">Cloud Learning</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <h5  class="control-label col-sm-2 margintop2">Time Slot:</h5>
+                     <div class="col-sm-10">
+                        <select id="time1"  ng-model="project.time" ng-change="alert('hi')" class="selectOrg">
+                           <option></option>
+                           <option value="10AM - 11AM">10AM - 11AM</option>
+                           <option value="11AM - 12PM">11AM - 12PM</option>
+                           <option value="12PM - 1PM">12PM - 1PM</option>
+                           <option value="1PM - 2PM">1PM - 2PM</option>
+                           <option value="2PM - 3PM">2PM - 3PM</option>
+                           <option value="3PM - 4PM">3PM - 4PM</option>
+                           <option value="4PM - 5PM">4PM - 5PM</option>
+                           <option value="5PM - 6PM">5PM - 6PM</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <h5  class="control-label col-sm-2 margintop2">Seating Capcity:</h5>
+                     <div class="col-sm-10">
+                        <select id="seat1" ng-model="project.seat" class="selectOrg">
+                           <option></option>
+                           <option value="50">50</option>
+                           <option value="100">100</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div  class="col-sm-offset-2 col-sm-10 margintop2">
+                     <button  ng-click="submitOrganiserForm()" class="btn btn-info btn-md btn2">Submit</button>
+                  </div>
+               </div>
+            </div>
+            <div>
+            </div>
+         </div>
+         <!-- end of html -->
+      </div>
+      <script></script>
+   </body>
+</html>
