@@ -1,0 +1,77 @@
+.heading{
+background-color: white;
+color: black;
+}
+ option:empty
+{
+  display:none;
+}
+.center{
+margin:auto;
+width:50%;
+}
+label{
+font-weight: 500 !important;
+}
+h5{
+font-weight: bold;
+}
+input{
+background-color: #031915;
+}
+select{
+background-color: #031915;
+}
+button{
+background-color: #2f504f !important;
+color: #ffffff;
+}
+body{
+background-image: url('../Images/image1.jpg');   background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: center; color: white !important;
+background-size: cover;
+}
+.h1c1{
+margin:auto;width:50%;
+}
+.h3c1{
+margin-top:10%; margin-left:29%
+}
+.margintop2{
+margin-top:2%!important;
+}
+.buttonright{
+float:right; background-color: #2f504f;
+}
+.buttonwidth{
+background-color: #2f504f; width: 100px;
+}
+.containerc{
+width: 50%; margin: auto;
+}
+.marginright4{
+margin-right: 4%;
+}
+.btnsubmt{
+background-color:##2f504f  !important; color:white !important; margin-left: -18%
+}
+.btn2{
+background-color:#8b0000; color:white; margin-left: 2%;margin-top:2%
+}
+.heading2{
+margin-top: 10%;
+margin-bottom: 6%;
+margin-left: 28%;
+}
+.guest{
+margin-left: -2%;
+}
+.selectOrg{
+height: 37px;
+width: 66%;
+border-radius: 2%;
+border-top: 0px;
+border-left: 0px;
+border-right: 0px
+}
